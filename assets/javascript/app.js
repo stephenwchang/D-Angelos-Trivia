@@ -34,28 +34,25 @@ let triviaQuestions = [
 
 ]
 
-let timeRemaining = 30;
+let timeRemaining = 5;
 let timerRunning = false;
 let level = 0;
+let gameRunning = false;
+let intervalId;
 
 
 document.getElementById('start-button').onclick = startGame;
 
 
 function startGame() {
-  if (!timerRunning) {
-    timerRunning = true;
-    setInterval(timeCounter, 1000);
+  if (!gameRunning){
+    gameRunning = true;
+    if (!timerRunning) {
+      timerRunning = true;
+      intervalId = setInterval(timeCounter, 1000);
+    }
+    generateQuestion();
   }
-  writeDisplay();
-
-
-  // when timer runs out, user loses
-  if (timeRemaining === 0) {
-
-  }
-
-
 }
 
 // countdown timer
@@ -65,10 +62,16 @@ function timeCounter() {
     document.getElementById('time-remaining').innerHTML = "Time Remaining: " + timeRemaining + " Seconds";
     timeRemaining --
   }
+
+  // when timer runs out, user loses
+  if (timeRemaining === -1) {
+    document.getElementById('question-caption-text').innerHTML = "You ran out of time!";
+    reset();
+  }
 }
 
-// writes out the question and choices as well as adds onclick events for each created choice
-function writeDisplay() {
+// displays question and randomly generates order of choices as well as adds onclick events for each created choice
+function generateQuestion() {
 
   let c1, c2, c3, c4;
   let randomizeFunctions = [writeC1, writeC2, writeC3, writeAnswer]
@@ -121,14 +124,28 @@ function writeDisplay() {
 
   // if correct answer is selected
   function correctAnswer() {
-    console.log('correct');
+    document.getElementById('question-caption-text').innerHTML = "Correct!";
     level ++;
-    document.getElementById('game-display').innerHTML = "";
-    timeRemaining = 30;
-    writeDisplay();
+    reset();
   }
 
   function wrongAnswer() {
-    console.log('wrong answer');
+    document.getElementById('question-caption-text').innerHTML = "Wrong answer.";
+    level ++;
+    reset();
   }
+}
+
+function reset(){
+  document.getElementById('game-display').removeChild(document.getElementById('choice-1'));
+  document.getElementById('game-display').removeChild(document.getElementById('choice-2'));
+  document.getElementById('game-display').removeChild(document.getElementById('choice-3'));
+  clearInterval(intervalId);
+  setTimeout(function() {
+    timeRemaining = 30;
+    document.getElementById('game-display').innerHTML = "";
+    intervalId = setInterval(timeCounter, 1000);
+    generateQuestion();
+  },4000)
+
 }
