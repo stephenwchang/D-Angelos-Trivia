@@ -1,0 +1,29 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background-image: url('../images/background/funky-lines.png');
+  text-align: center;
+}
+
+.gameContent {
+  max-width: 700px;
+  margin: auto;
+  min-height: 200px;
+}
+
+#wins-text {
+  color: green;
+  text-align: left;
+  padding-left: 23px;
+  font-weight: 600;
+}
+
+#dloImage {
+  height: 200px;
+  max-width: auto;
+}
+
+@media only screen and (max-width: 770px) {
+  .gameContent {
+    max-width: 550px;
+  }
+}

@@ -34,11 +34,12 @@ let triviaQuestions = [
 
 ]
 
-let timeRemaining = 5;
+let timeRemaining = 30;
 let timerRunning = false;
 let level = 0;
 let gameRunning = false;
 let intervalId;
+let numCorrect = 0;
 
 
 document.getElementById('start-button').onclick = startGame;
@@ -124,8 +125,10 @@ function generateQuestion() {
 
   // if correct answer is selected
   function correctAnswer() {
-    document.getElementById('question-caption-text').innerHTML = "Correct!";
     level ++;
+    numCorrect ++;
+    document.getElementById('question-caption-text').innerHTML = "Correct!";
+    document.getElementById('wins-text').innerHTML = 'Correct: ' + numCorrect;
     reset();
   }
 
