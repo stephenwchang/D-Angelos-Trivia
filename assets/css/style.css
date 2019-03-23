@@ -10,7 +10,13 @@ body {
   min-height: 200px;
 }
 
+.btn {
+  border: 1px solid lightgrey;
+}
+
+
 #wins-text {
+  position: absolute;
   color: green;
   text-align: left;
   padding-left: 23px;
@@ -20,6 +26,15 @@ body {
 #dloImage {
   height: 200px;
   max-width: auto;
+}
+
+#question-caption-text {
+  min-height: 30px;
+  font-weight: bold;
+}
+
+#time-remaining {
+  min-height: 25px;
 }
 
 @media only screen and (max-width: 770px) {

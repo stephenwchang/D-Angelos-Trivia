@@ -10,26 +10,50 @@ let triviaQuestions = [
 
   question2 = {
     question: 'Who is the lowest seeded team to ever win an NBA championship?',
-    choice1: '2002-2003 New Jersey Nets',
-    choice2: 'temp',
-    choice3: 'temp',
+    choice1: '2002-2003 New Jersey Nets, third seed',
+    choice2: '2005-2006 Chicago Bulls, seventh seed',
+    choice3: '2015-2016 Houston Rockets, eigth seed',
     answer: '1994-95 Houston Rockets, sixth seed',
   },
 
   question3 = {
     question: 'What player has the scored the most points in NBA history',
-    choice1: 'temp',
-    choice2: 'temp',
-    choice3: 'temp',
+    choice1: 'Kobe Bryant',
+    choice2: 'Shaquille ONeal',
+    choice3: 'Vince Carter',
     answer: 'Kareem Abdul-Jabar',
   },
 
-  question2 = {
+  question4 = {
     question: 'Which team had the best nba record',
-    choice1: 'temp',
-    choice2: 'temp',
-    choice3: 'temp',
-    answer: '2016-2017 Golden State Warriors, 72-10',
+    choice1: '1996-1997 Chicago Bulls',
+    choice2: '1972-1973 Los Angeles Lakers',
+    choice3: '1986-1987 Boston Celtics',
+    answer: '2016-2017 Golden State Warriors',
+  },
+
+  question5 = {
+    question: 'Which one of these was not a 1st overall draft pick?',
+    choice1: 'Chris Webber',
+    choice2: 'Kenyon Martin',
+    choice3: 'Allen Iverson',
+    answer: 'Dikembe Mutombo',
+  },
+
+  question6 = {
+    question: 'The Sacramento Kings previously resided in all of the following cities EXCEPT:',
+    choice1: 'Rochester, NY',
+    choice2: 'Cincinnati, OH',
+    choice3: 'Kansas City, MO',
+    answer: 'Oakland, CA',
+  },
+
+  question7 = {
+    question: 'The Houston Rockets originated in',
+    choice1: 'Toledo, OH',
+    choice2: 'Huntsville, AL',
+    choice3: 'Houston, TX',
+    answer: 'San Diego, CA',
   },
 
 ]
