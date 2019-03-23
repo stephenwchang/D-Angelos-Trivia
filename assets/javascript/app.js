@@ -64,6 +64,7 @@ let level = 0;
 let gameRunning = false;
 let intervalId;
 let numCorrect = 0;
+let numWrong = 0;
 
 
 document.getElementById('start-button').onclick = startGame;
@@ -98,69 +99,79 @@ function timeCounter() {
 // displays question and randomly generates order of choices as well as adds onclick events for each created choice
 function generateQuestion() {
 
-  let c1, c2, c3, c4;
-  let randomizeFunctions = [writeC1, writeC2, writeC3, writeAnswer]
-  document.getElementById('question-caption-text').innerHTML = triviaQuestions[level].question;
+  if (triviaQuestions[level] === undefined) {
+    document.getElementById('question-caption-text').innerHTML = "You guessed " + numCorrect + " correct and " + numWrong + " incorrect";
 
-  function writeC1() {
-    c1 = document.createElement('div');
-    c1.setAttribute('id', 'choice-1');
-    c1.innerHTML = triviaQuestions[level].choice1;
-    document.getElementById('game-display').appendChild(c1);
+  } else {
+
+    let c1, c2, c3, c4;
+    let randomizeFunctions = [writeC1, writeC2, writeC3, writeAnswer]
+    document.getElementById('question-caption-text').innerHTML = triviaQuestions[level].question;
+
+    function writeC1() {
+      c1 = document.createElement('div');
+      c1.setAttribute('id', 'choice-1');
+      c1.innerHTML = triviaQuestions[level].choice1;
+      document.getElementById('game-display').appendChild(c1);
+    }
+
+    function writeC2() {
+      c2 = document.createElement('div');
+      c2.setAttribute('id', 'choice-2');
+      c2.innerHTML = triviaQuestions[level].choice2;
+      document.getElementById('game-display').appendChild(c2);
+    }
+
+    function writeC3() {
+      c3 = document.createElement('div');
+      c3.setAttribute('id', 'choice-3');
+      c3.innerHTML = triviaQuestions[level].choice3;
+      document.getElementById('game-display').appendChild(c3);
+    }
+
+    function writeAnswer() {
+      c4 = document.createElement('div');
+      c4.setAttribute('id', 'answer');
+      c4.innerHTML = triviaQuestions[level].answer;
+      document.getElementById('game-display').appendChild(c4);
+    }
+
+    // randomize order of functions to display different order of choices
+    let i = 0
+    let random
+    while (i < randomizeFunctions.length) {
+        random = Math.floor(Math.random() * randomizeFunctions.length)
+        if (randomizeFunctions[random] != false) {
+          // call one of four randomly generated functions
+          randomizeFunctions[random]();
+            randomizeFunctions[random] = false;
+            i++
+        }
+    }
+
+    document.getElementById('answer').onclick = correctAnswer;
+    document.getElementById('choice-1').onclick = wrongAnswer;
+    document.getElementById('choice-2').onclick = wrongAnswer;
+    document.getElementById('choice-3').onclick = wrongAnswer;
+
+    // if correct answer is selected
+    function correctAnswer() {
+      level ++;
+      numCorrect ++;
+      document.getElementById('question-caption-text').innerHTML = "Correct!";
+      document.getElementById('wins-text').innerHTML = 'Correct: ' + numCorrect;
+      reset();
+    }
+
+    function wrongAnswer() {
+      numWrong ++;
+      document.getElementById('question-caption-text').innerHTML = "Wrong answer.";
+      level ++;
+      reset();
+    }
   }
 
-  function writeC2() {
-    c2 = document.createElement('div');
-    c2.setAttribute('id', 'choice-2');
-    c2.innerHTML = triviaQuestions[level].choice2;
-    document.getElementById('game-display').appendChild(c2);
-  }
 
-  function writeC3() {
-    c3 = document.createElement('div');
-    c3.setAttribute('id', 'choice-3');
-    c3.innerHTML = triviaQuestions[level].choice3;
-    document.getElementById('game-display').appendChild(c3);
-  }
-
-  function writeAnswer() {
-    c4 = document.createElement('div');
-    c4.setAttribute('id', 'answer');
-    c4.innerHTML = triviaQuestions[level].answer;
-    document.getElementById('game-display').appendChild(c4);
-  }
-
-  // randomize order of functions to display different order of choices
-  let i = 0
-  let random
-  while (i < randomizeFunctions.length) {
-      random = Math.floor(Math.random() * randomizeFunctions.length)
-      if (randomizeFunctions[random] != false) {
-        randomizeFunctions[random]();
-          randomizeFunctions[random] = false;
-          i++
-      }
-  }
-
-  document.getElementById('answer').onclick = correctAnswer;
-  document.getElementById('choice-1').onclick = wrongAnswer;
-  document.getElementById('choice-2').onclick = wrongAnswer;
-  document.getElementById('choice-3').onclick = wrongAnswer;
-
-  // if correct answer is selected
-  function correctAnswer() {
-    level ++;
-    numCorrect ++;
-    document.getElementById('question-caption-text').innerHTML = "Correct!";
-    document.getElementById('wins-text').innerHTML = 'Correct: ' + numCorrect;
-    reset();
-  }
-
-  function wrongAnswer() {
-    document.getElementById('question-caption-text').innerHTML = "Wrong answer.";
-    level ++;
-    reset();
-  }
 }
 
 function reset(){
@@ -173,6 +184,6 @@ function reset(){
     document.getElementById('game-display').innerHTML = "";
     intervalId = setInterval(timeCounter, 1000);
     generateQuestion();
-  },4000)
+  },3000)
 
 }
