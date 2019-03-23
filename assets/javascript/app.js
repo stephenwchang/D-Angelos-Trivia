@@ -100,8 +100,11 @@ function timeCounter() {
 function generateQuestion() {
 
   if (triviaQuestions[level] === undefined) {
-    document.getElementById('question-caption-text').innerHTML = "You guessed " + numCorrect + " correct and " + numWrong + " incorrect";
-
+    document.getElementById('question-caption-text').innerHTML = "You guessed " + numCorrect + " correct and " + numWrong + " incorrect. Press the start button to start over";
+    gameRunning = false;
+    numCorrect = 0;
+    numWrong = 0;
+    level = 0;
   } else {
 
     let c1, c2, c3, c4;
